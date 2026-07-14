@@ -1,0 +1,88 @@
+---
+import { reasons } from '../data/site';
+---
+
+<section class="section why" id="por-que-invertir" aria-labelledby="por-que-title">
+  <div class="container why__grid">
+    <div>
+      <p class="section__eyebrow">Por qué invertir</p>
+      <h2 class="section__title" id="por-que-title">Haz crecer tu patrimonio en una zona de crecimiento</h2>
+      <p class="section__lead">
+        Transformamos zonas con alto potencial en espacios modernos, accesibles y rentables para familias y emprendedores.
+      </p>
+    </div>
+
+    <div class="why__cards">
+      {
+        reasons.map((item, index) => (
+          <article class="why__card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    background: var(--gradient-luxury);
+    color: var(--color-white);
+  }
+
+  .why :global(.section__title),
+  .why :global(.section__lead) {
+    color: var(--color-white);
+  }
+
+  .why :global(.section__lead) {
+    opacity: 0.85;
+  }
+
+  .why__grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .why__cards {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .why__card {
+    border: 1px solid rgba(232, 198, 106, 0.28);
+    border-radius: var(--radius-card);
+    padding: var(--space-3);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .why__card span {
+    display: block;
+    color: var(--color-gold-light);
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .why__card h3 {
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .why__card p {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+  }
+
+  @media (min-width: 900px) {
+    .why__grid {
+      grid-template-columns: 1fr 1.1fr;
+      align-items: center;
+    }
+  }
+</style>

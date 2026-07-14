@@ -1,0 +1,132 @@
+---
+import { projects, ctas } from '../data/site';
+---
+
+<section class="section projects" id="proyectos" aria-labelledby="proyectos-title">
+  <div class="container">
+    <p class="section__eyebrow">Nuestros proyectos</p>
+    <h2 class="section__title" id="proyectos-title">Desarrollo con visión de futuro</h2>
+    <p class="section__lead">
+      Cada proyecto tiene identidad propia y mantiene la coherencia de Solara Corporación.
+    </p>
+
+    <div class="projects__list">
+      {
+        projects.map((project) => (
+          <article class:list={['project', { 'project--featured': project.featured }]}>
+            <div class="project__media">
+              <img src={project.image} alt={`Proyecto ${project.name}`} loading="lazy" />
+            </div>
+            <div class="project__body">
+              <p class="project__type">{project.type}</p>
+              <h3>{project.name}</h3>
+              <p class="project__location">{project.location}</p>
+              <p class="project__summary">{project.summary}</p>
+              <ul>
+                {project.highlights.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <a class="btn btn--primary" href="#contacto">{ctas.quote}</a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects {
+    background: var(--color-bg);
+  }
+
+  .projects__list {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+
+  .project {
+    display: grid;
+    background: var(--color-surface);
+    border: 1px solid rgba(199, 154, 43, 0.2);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .project:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .project__media {
+    min-height: 240px;
+    overflow: hidden;
+  }
+
+  .project__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .project:hover .project__media img {
+    transform: scale(1.05);
+  }
+
+  .project__body {
+    padding: var(--space-4);
+  }
+
+  .project__type {
+    color: var(--color-gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .project h3 {
+    font-size: 2rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .project__location {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .project__summary {
+    margin-bottom: 1rem;
+  }
+
+  .project ul {
+    margin: 0 0 1.5rem;
+    padding-left: 1.1rem;
+    color: var(--color-text-secondary);
+  }
+
+  .project li + li {
+    margin-top: 0.35rem;
+  }
+
+  @media (min-width: 900px) {
+    .project--featured {
+      grid-template-columns: 1.15fr 1fr;
+    }
+
+    .projects__list > .project:not(.project--featured) {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .project__media {
+      min-height: 100%;
+    }
+  }
+</style>

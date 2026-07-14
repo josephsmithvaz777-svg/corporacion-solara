@@ -1,0 +1,70 @@
+---
+import { faqs } from '../data/site';
+---
+
+<section class="section faq" id="faq" aria-labelledby="faq-title">
+  <div class="container faq__wrap">
+    <div>
+      <p class="section__eyebrow">Preguntas frecuentes</p>
+      <h2 class="section__title" id="faq-title">Resolvemos tus dudas</h2>
+      <p class="section__lead">Información clara para decidir con confianza.</p>
+    </div>
+
+    <div class="faq__list">
+      {
+        faqs.map((item) => (
+          <details class="faq__item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    background: var(--color-surface);
+  }
+
+  .faq__wrap {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .faq__list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .faq__item {
+    border: 1px solid rgba(199, 154, 43, 0.25);
+    border-radius: 18px;
+    padding: 1rem 1.15rem;
+    background: var(--color-bg);
+  }
+
+  .faq__item summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-primary);
+    list-style: none;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__item p {
+    margin-top: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 900px) {
+    .faq__wrap {
+      grid-template-columns: 0.85fr 1.15fr;
+      align-items: start;
+    }
+  }
+</style>

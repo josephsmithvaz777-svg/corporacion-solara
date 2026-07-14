@@ -1,0 +1,79 @@
+---
+import { steps } from '../data/site';
+---
+
+<section class="section process" id="proceso" aria-labelledby="proceso-title">
+  <div class="container">
+    <p class="section__eyebrow">Tu camino</p>
+    <h2 class="section__title" id="proceso-title">Un proceso claro y cercano</h2>
+    <p class="section__lead">Te acompañamos con transparencia, sin presión y con lenguaje sencillo.</p>
+
+    <ol class="process__list">
+      {
+        steps.map((step) => (
+          <li class="process__item">
+            <span>{step.n}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    background: var(--color-surface);
+  }
+
+  .process__list {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .process__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: var(--space-3);
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(199, 154, 43, 0.2);
+    background: var(--color-bg);
+  }
+
+  .process__item span {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-gold);
+    line-height: 1;
+  }
+
+  .process__item h3 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .process__item p {
+    color: var(--color-text-secondary);
+  }
+
+  @media (min-width: 900px) {
+    .process__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .process__item {
+      grid-template-columns: 1fr;
+      min-height: 220px;
+    }
+  }
+</style>

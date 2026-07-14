@@ -1,0 +1,79 @@
+---
+import { testimonials } from '../data/site';
+---
+
+<section class="section testimonials" id="testimonios" aria-labelledby="testimonios-title">
+  <div class="container">
+    <p class="section__eyebrow">Historias reales</p>
+    <h2 class="section__title" id="testimonios-title">Quienes confían en Solara</h2>
+    <p class="section__lead">Inversión con cercanía, seguridad y mirada de largo plazo.</p>
+
+    <div class="testimonials__grid">
+      {
+        testimonials.map((item) => (
+          <article class="testimonial">
+            <p class="testimonial__focus">“{item.focus}”</p>
+            <p class="testimonial__quote">{item.quote}</p>
+            <div class="testimonial__meta">
+              <strong>{item.name}</strong>
+              <span>{item.place}</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--color-bg);
+  }
+
+  .testimonials__grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: var(--space-5);
+  }
+
+  .testimonial {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(199, 154, 43, 0.2);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .testimonial__focus {
+    font-family: var(--font-heading);
+    font-size: 1.65rem;
+    color: var(--color-primary);
+    margin-bottom: 0.85rem;
+  }
+
+  .testimonial__quote {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .testimonial__meta strong {
+    color: var(--color-primary);
+  }
+
+  .testimonial__meta span {
+    color: var(--color-gold);
+  }
+
+  @media (min-width: 900px) {
+    .testimonials__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

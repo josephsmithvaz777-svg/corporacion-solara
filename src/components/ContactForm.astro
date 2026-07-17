@@ -2,26 +2,14 @@
 import { ctas, projects } from '../data/site';
 ---
 
-<section class="section contact" id="contacto" aria-labelledby="contacto-title">
-  <div class="container contact__grid">
-    <div class="contact__intro">
-      <p class="section__eyebrow">Hablemos</p>
-      <h2 class="section__title" id="contacto-title">Solicita información</h2>
-      <p class="section__lead">
-        Completa el formulario y un asesor te contactará. Sin presión: te ayudamos a elegir con claridad.
-      </p>
-      <ul>
-        <li>Agenda una visita</li>
-        <li>Cotiza tu lote</li>
-        <li>Conoce Mall Virú y más proyectos</li>
-      </ul>
-    </div>
+<section class="lead" id="contacto" aria-label="Formulario de contacto">
+  <div class="lead__panel">
+    <div class="lead__badge">LOTES</div>
 
-    <form class="contact__form" method="post" action="#" data-contact-form>
-      <p class="contact__steps" aria-hidden="true"><span>1</span><span>2</span></p>
-      <h3>Quiero recibir información</h3>
+    <form class="lead__form" method="post" action="#" data-contact-form>
+      <h2 class="lead__title">Quiero recibir información</h2>
 
-      <div class="contact__row">
+      <div class="lead__row">
         <label>
           <span class="sr-only">Nombre</span>
           <input type="text" name="nombre" placeholder="Nombre*" required autocomplete="given-name" />
@@ -32,10 +20,10 @@ import { ctas, projects } from '../data/site';
         </label>
       </div>
 
-      <div class="contact__row">
+      <div class="lead__row">
         <label>
           <span class="sr-only">Documento</span>
-          <input type="text" name="documento" placeholder="Nro. de documento" autocomplete="off" />
+          <input type="text" name="documento" placeholder="Nro. de documento*" required autocomplete="off" />
         </label>
         <label>
           <span class="sr-only">Teléfono</span>
@@ -57,156 +45,188 @@ import { ctas, projects } from '../data/site';
         </select>
       </label>
 
-      <label class="contact__check">
+      <label class="lead__check">
         <input type="checkbox" name="privacidad" required />
         <span>He leído y acepto el tratamiento de mis datos personales.</span>
       </label>
 
-      <button class="btn btn--on-dark" type="submit">{ctas.primary}</button>
-      <p class="contact__note" data-form-note hidden>Gracias. Pronto un asesor te contactará.</p>
+      <label class="lead__check">
+        <input type="checkbox" name="comercial" />
+        <span>Acepto el envío de comunicaciones comerciales.</span>
+      </label>
+
+      <button class="btn btn--on-dark lead__submit" type="submit">{ctas.primary}</button>
+      <p class="lead__note" data-form-note hidden>Gracias. Pronto un asesor te contactará.</p>
     </form>
   </div>
 </section>
 
 <style>
-  .contact {
-    background: var(--color-primary);
-    color: var(--color-white);
+  .lead {
+    background: var(--color-white);
+    padding: var(--space-4) 1rem var(--space-5);
+    scroll-margin-top: 100px;
   }
 
-  .contact :global(.section__title),
-  .contact :global(.section__lead) {
-    color: var(--color-white);
-  }
-
-  .contact :global(.section__lead) {
-    opacity: 0.85;
-  }
-
-  .contact__grid {
-    display: grid;
-    gap: var(--space-5);
-  }
-
-  .contact__intro ul {
-    margin: 1.5rem 0 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 0.65rem;
-  }
-
-  .contact__intro li {
+  .lead__panel {
     position: relative;
-    padding-left: 1.25rem;
-    color: rgba(255, 255, 255, 0.86);
-  }
-
-  .contact__intro li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.55rem;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-gold);
-  }
-
-  .contact__form {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(232, 198, 106, 0.28);
+    width: 100%;
+    max-width: 560px;
+    margin-inline: auto;
+    background: var(--color-primary);
+    border: 1px solid rgba(232, 198, 106, 0.35);
     border-radius: var(--radius-card);
-    padding: var(--space-4);
-    backdrop-filter: blur(16px);
-    display: grid;
-    gap: 0.85rem;
+    padding: 1.5rem 1.15rem 1.35rem;
+    box-shadow: var(--shadow-soft);
   }
 
-  .contact__steps {
-    display: flex;
-    gap: 0.65rem;
+  .lead__badge {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    background: var(--gradient-gold);
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.65rem;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .lead__form {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 0.5rem;
+  }
+
+  .lead__title {
+    color: var(--color-white);
+    font-family: var(--font-family);
+    font-size: 1.2rem;
+    font-weight: 600;
     margin: 0;
   }
 
-  .contact__steps span {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+  .lead__row {
     display: grid;
-    place-items: center;
-    font-size: 0.85rem;
-    font-weight: 600;
+    gap: 0.65rem;
   }
 
-  .contact__steps span:first-child {
-    background: var(--color-gold);
-    color: var(--color-primary);
-  }
-
-  .contact__steps span:last-child {
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    color: var(--color-white);
-  }
-
-  .contact__form h3 {
-    color: var(--color-white);
-    font-family: var(--font-body);
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-
-  .contact__row {
-    display: grid;
-    gap: 0.85rem;
-  }
-
-  .contact__form input,
-  .contact__form select {
+  .lead__form input,
+  .lead__form select {
     width: 100%;
-    min-height: 52px;
+    min-height: 46px;
     border-radius: var(--radius-input);
     border: 1px solid var(--color-gold-soft);
     background: var(--color-white);
     color: var(--color-text);
-    padding: 0 1rem;
+    padding: 0 0.85rem;
+    font-size: 0.9rem;
   }
 
-  .contact__form input:focus,
-  .contact__form select:focus {
+  .lead__form input:focus,
+  .lead__form select:focus {
     outline: 2px solid var(--color-gold);
     outline-offset: 1px;
   }
 
-  .contact__check {
+  .lead__check {
     display: flex;
-    gap: 0.65rem;
+    gap: 0.55rem;
     align-items: flex-start;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.88);
   }
 
-  .contact__check input {
+  .lead__check input {
     width: auto;
     min-height: auto;
-    margin-top: 0.2rem;
+    margin-top: 0.15rem;
   }
 
-  .contact__note {
+  .lead__submit {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .lead__note {
     color: var(--color-gold-light);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    margin: 0;
   }
 
-  @media (min-width: 700px) {
-    .contact__row {
+  @media (min-width: 700px) and (max-width: 1023px) {
+    .lead__row {
       grid-template-columns: 1fr 1fr;
     }
   }
 
-  @media (min-width: 960px) {
-    .contact__grid {
-      grid-template-columns: 1fr 1.05fr;
-      align-items: center;
+  @media (min-width: 1024px) {
+    .lead {
+      background: transparent;
+      padding: 0;
+      margin: 0;
+    }
+
+    .lead__panel {
+      margin: 0;
+      max-width: none;
+      max-height: calc(100vh - var(--nav-height) - 130px);
+      overflow: auto;
+      padding: 1.15rem 0.9rem 1.1rem;
+      box-shadow: var(--shadow-luxury);
+    }
+
+    .lead__title {
+      font-size: 1.05rem;
+    }
+
+    .lead__form {
+      gap: 0.55rem;
+    }
+
+    .lead__form input,
+    .lead__form select {
+      min-height: 42px;
+      font-size: 0.85rem;
+      padding: 0 0.7rem;
+    }
+
+    .lead__check {
+      font-size: 0.7rem;
+    }
+
+    .lead__submit {
+      min-height: 44px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .lead__row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .lead__panel {
+      padding: 1.5rem 1.15rem 1.35rem;
+    }
+
+    .lead__title {
+      font-size: 1.2rem;
+    }
+
+    .lead__form {
+      gap: 0.7rem;
+    }
+
+    .lead__form input,
+    .lead__form select {
+      min-height: 46px;
+      font-size: 0.9rem;
+      padding: 0 0.85rem;
+    }
+
+    .lead__check {
+      font-size: 0.78rem;
     }
   }
 </style>

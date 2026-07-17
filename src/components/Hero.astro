@@ -1,25 +1,66 @@
 ---
-import { brand, ctas } from '../data/site';
+import { brand } from '../data/site';
+import banner1 from '../assets/banner-home-NEW-1.webp';
+import banner2 from '../assets/banner-home-NEW-2.webp';
+import banner3 from '../assets/banner-home-NEW-3.webp';
+
+const slides = [
+  { image: banner1, label: 'Mall Virú' },
+  { image: banner2, label: 'Lotes comerciales' },
+  { image: banner3, label: 'Lotes residenciales' },
+];
 ---
 
-<section class="hero" id="inicio" aria-label="Inicio">
-  <div class="hero__media" aria-hidden="true">
-    <img src="/images/hero-mall-viru.png" alt="" class="hero__image" />
-    <div class="hero__overlay"></div>
-  </div>
+<section class="hero" id="inicio" aria-roledescription="carrusel" aria-label="Banner principal">
+  <h1 class="sr-only">{brand.name}</h1>
+  <div class="hero__frame">
+    <div class="hero__viewport" data-hero-carousel>
+      {
+        slides.map((slide, index) => (
+          <article
+            class:list={['hero__slide', { 'is-active': index === 0 }]}
+            data-slide
+            aria-hidden={index === 0 ? 'false' : 'true'}
+            aria-label={slide.label}
+          >
+            <img
+              src={slide.image.src}
+              alt={slide.label}
+              class="hero__image"
+              width="1942"
+              height="534"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              fetchpriority={index === 0 ? 'high' : 'auto'}
+            />
+          </article>
+        ))
+      }
 
-  <div class="container hero__content">
-    <p class="hero__brand reveal">{brand.name}</p>
-    <h1 class="hero__title reveal reveal-delay-1">
-      Invierte hoy.<br />
-      <span>Crece mañana.</span>
-    </h1>
-    <p class="hero__subtitle reveal reveal-delay-2">
-      {brand.tagline}. Lotes residenciales y comerciales en Virú con proyectos pensados para patrimonio y negocio.
-    </p>
-    <div class="hero__actions reveal reveal-delay-2">
-      <a class="btn btn--primary" href="#contacto">{ctas.visit}</a>
-      <a class="btn btn--secondary-light" href="#proyectos">Conoce el proyecto</a>
+      <button class="hero__nav hero__nav--prev" type="button" data-hero-prev aria-label="Banner anterior">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 5L8 12l7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <button class="hero__nav hero__nav--next" type="button" data-hero-next aria-label="Banner siguiente">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+
+      <div class="hero__dots" role="tablist" aria-label="Seleccionar banner">
+        {
+          slides.map((_, index) => (
+            <button
+              class:list={['hero__dot', { 'is-active': index === 0 }]}
+              type="button"
+              role="tab"
+              aria-label={`Ir al banner ${index + 1}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              data-hero-dot={index}
+            ></button>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
@@ -27,79 +68,172 @@ import { brand, ctas } from '../data/site';
 <style>
   .hero {
     position: relative;
-    min-height: min(92vh, 820px);
-    display: grid;
-    align-items: end;
-    color: var(--color-white);
+    background: var(--color-primary-dark);
+  }
+
+  .hero__frame {
+    width: 100%;
+    max-width: 1942px;
+    margin-inline: auto;
+  }
+
+  .hero__viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1942 / 534;
     overflow: hidden;
   }
 
-  .hero__media {
+  @media (min-width: 1942px) {
+    .hero__viewport {
+      height: 534px;
+      aspect-ratio: auto;
+    }
+  }
+
+  .hero__slide {
     position: absolute;
     inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.55s ease,
+      visibility 0.55s ease;
+  }
+
+  .hero__slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
   }
 
   .hero__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
-    transform: scale(1.04);
-    animation: fade-in 1.2s ease both;
+    object-position: center;
   }
 
-  .hero__overlay {
+  .hero__nav {
     position: absolute;
-    inset: 0;
-    background: var(--gradient-hero);
-  }
-
-  .hero__content {
-    position: relative;
-    z-index: 1;
-    padding: 7rem 0 5rem;
-    max-width: 46rem;
-  }
-
-  .hero__brand {
-    font-family: var(--font-heading);
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    margin-bottom: 0.75rem;
+    top: 50%;
+    z-index: 4;
+    translate: 0 -50%;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.18);
     color: var(--color-white);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: background var(--transition);
   }
 
-  .hero__title {
-    font-size: clamp(2.75rem, 7vw, 5rem);
-    color: var(--color-white);
-    margin-bottom: 1.25rem;
+  .hero__nav:hover {
+    background: rgba(255, 255, 255, 0.3);
   }
 
-  .hero__title span {
-    color: var(--color-gold-light);
+  .hero__nav--prev {
+    left: 0.75rem;
   }
 
-  .hero__subtitle {
-    font-size: 1.05rem;
-    max-width: 34rem;
-    color: rgba(255, 255, 255, 0.88);
-    margin-bottom: 2rem;
+  .hero__nav--next {
+    right: 0.75rem;
   }
 
-  .hero__actions {
+  .hero__dots {
+    position: absolute;
+    left: 50%;
+    bottom: 0.75rem;
+    z-index: 4;
+    translate: -50% 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
+    gap: 0.4rem;
+    align-items: center;
   }
 
-  @media (min-width: 900px) {
-    .hero {
-      align-items: center;
-    }
+  .hero__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      width var(--transition);
+  }
 
-    .hero__content {
-      padding: 8rem 0 6rem;
+  .hero__dot.is-active {
+    width: 22px;
+    border-radius: 999px;
+    background: var(--color-gold-light);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__slide,
+    .hero__dot,
+    .hero__nav {
+      transition: none;
     }
   }
 </style>
+
+<script>
+  const root = document.querySelector('[data-hero-carousel]');
+  if (root) {
+    const slides = Array.from(root.querySelectorAll('[data-slide]'));
+    const dots = Array.from(root.querySelectorAll('[data-hero-dot]'));
+    const prev = root.querySelector('[data-hero-prev]');
+    const next = root.querySelector('[data-hero-next]');
+    let index = 0;
+    let timer;
+
+    const show = (nextIndex) => {
+      index = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const active = i === index;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      dots.forEach((dot, i) => {
+        const active = i === index;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    };
+
+    const start = () => {
+      stop();
+      timer = window.setInterval(() => show(index + 1), 6000);
+    };
+
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+    };
+
+    prev?.addEventListener('click', () => {
+      show(index - 1);
+      start();
+    });
+    next?.addEventListener('click', () => {
+      show(index + 1);
+      start();
+    });
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const value = Number(dot.getAttribute('data-hero-dot') || 0);
+        show(value);
+        start();
+      });
+    });
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    start();
+  }
+</script>

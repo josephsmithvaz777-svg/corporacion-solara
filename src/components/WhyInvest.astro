@@ -4,7 +4,7 @@ import { reasons } from '../data/site';
 
 <section class="section why" id="por-que-invertir" aria-labelledby="por-que-title">
   <div class="container why__grid">
-    <div>
+    <div class="why__intro">
       <p class="section__eyebrow">Por qué invertir</p>
       <h2 class="section__title" id="por-que-title">Haz crecer tu patrimonio en una zona de crecimiento</h2>
       <p class="section__lead">
@@ -30,6 +30,7 @@ import { reasons } from '../data/site';
   .why {
     background: var(--gradient-luxury);
     color: var(--color-white);
+    overflow: visible;
   }
 
   .why :global(.section__title),
@@ -44,6 +45,7 @@ import { reasons } from '../data/site';
   .why__grid {
     display: grid;
     gap: var(--space-5);
+    align-items: start;
   }
 
   .why__cards {
@@ -61,14 +63,15 @@ import { reasons } from '../data/site';
   .why__card span {
     display: block;
     color: var(--color-gold-light);
-    font-family: var(--font-heading);
+    font-family: var(--font-family);
     font-size: 1.75rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
   }
 
   .why__card h3 {
     color: var(--color-white);
-    font-family: var(--font-body);
+    font-family: var(--font-family);
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.4rem;
@@ -79,10 +82,10 @@ import { reasons } from '../data/site';
     font-size: 0.95rem;
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 1200px) {
     .why__grid {
-      grid-template-columns: 1fr 1.1fr;
-      align-items: center;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: var(--space-4);
     }
   }
 </style>

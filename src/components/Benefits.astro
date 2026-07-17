@@ -82,7 +82,8 @@ import { benefits } from '../data/site';
     }
   }
 
-  @media (min-width: 1100px) {
+  /* Con sidebar del formulario (desde 1280px) mejor 2 columnas; 4 solo en pantallas muy anchas */
+  @media (min-width: 1600px) {
     .benefits__grid {
       grid-template-columns: repeat(4, 1fr);
     }

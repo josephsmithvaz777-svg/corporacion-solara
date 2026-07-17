@@ -137,3 +137,39 @@ export const ctas = {
   quote: 'Cotiza tu lote',
   advisor: 'Habla con un asesor',
 };
+
+export const heroSlides = [
+  {
+    image: '/images/banners/banner-home-1.webp',
+    eyebrow: 'Solara Corporación',
+    title: 'Invierte hoy.',
+    highlight: 'Crece mañana.',
+    text: 'Inversión con seguridad, respaldo y visión de futuro. Lotes residenciales y comerciales en Virú.',
+    ctaPrimary: { label: 'Agenda una visita', href: '#contacto' },
+    ctaSecondary: { label: 'Conoce el proyecto', href: '#proyectos' },
+    badge: 'Mall Virú',
+    location: 'Frente a la Panamericana · Puente Virú',
+  },
+  {
+    image: '/images/banners/banner-home-2.webp',
+    eyebrow: 'Oportunidad de inversión',
+    title: 'Tu negocio',
+    highlight: 'comienza aquí.',
+    text: 'Lotes comerciales en zonas estratégicas con alto flujo y proyección de plusvalía.',
+    ctaPrimary: { label: 'Cotiza tu lote', href: '#contacto' },
+    ctaSecondary: { label: 'Ver proyectos', href: '#proyectos' },
+    badge: 'Lotes comerciales',
+    location: 'Virú · La Libertad',
+  },
+  {
+    image: '/images/banners/banner-home-3.webp',
+    eyebrow: 'Patrimonio familiar',
+    title: 'Haz crecer',
+    highlight: 'tu futuro.',
+    text: 'Urbanizaciones y lotes residenciales pensados para familias e inversionistas del norte del Perú.',
+    ctaPrimary: { label: 'Solicita información', href: '#contacto' },
+    ctaSecondary: { label: 'Por qué invertir', href: '#por-que-invertir' },
+    badge: 'Lotes residenciales',
+    location: 'Virú · Zona de crecimiento',
+  },
+];

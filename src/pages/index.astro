@@ -18,15 +18,93 @@ import WhatsApp from '../components/WhatsApp.astro';
   <Header />
   <main>
     <Hero />
-    <Benefits />
-    <Projects />
-    <WhyInvest />
-    <Process />
-    <Testimonials />
-    <FAQ />
-    <MapSection />
-    <ContactForm />
+
+    <div class="layout-with-form">
+      <aside class="layout-with-form__aside">
+        <div class="layout-with-form__sticky">
+          <ContactForm />
+        </div>
+      </aside>
+
+      <div class="layout-with-form__main">
+        <Benefits />
+        <Projects />
+        <WhyInvest />
+        <Process />
+        <Testimonials />
+        <FAQ />
+        <MapSection />
+      </div>
+    </div>
   </main>
   <Footer />
   <WhatsApp />
 </Layout>
+
+<style>
+  /* Móvil: formulario debajo del carrusel, luego contenido */
+  .layout-with-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .layout-with-form__aside {
+    order: 1;
+  }
+
+  .layout-with-form__main {
+    order: 2;
+    min-width: 0;
+  }
+
+  /*
+    Desde 1024px (como Los Portales):
+    - 2 columnas
+    - formulario sticky a la derecha
+    - se frena al llegar al footer
+  */
+  @media (min-width: 1024px) {
+    .layout-with-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(300px, 32vw, 380px);
+      gap: 1.25rem;
+      align-items: stretch;
+      width: 100%;
+      margin: 0;
+      padding: 1.5rem 1rem 2.5rem 1.25rem;
+    }
+
+    .layout-with-form__aside {
+      order: 2;
+      min-width: 0;
+    }
+
+    .layout-with-form__main {
+      order: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .layout-with-form__sticky {
+      position: sticky;
+      top: calc(var(--nav-height) + 110px);
+      z-index: 5;
+    }
+
+    .layout-with-form__main :global(.container) {
+      width: 100%;
+      max-width: none;
+    }
+
+    .layout-with-form__main :global(.section) {
+      padding-inline: 0;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .layout-with-form {
+      gap: 1.75rem;
+      padding: 2rem 1.25rem 3rem clamp(1.5rem, 4vw, 3rem);
+    }
+  }
+</style>

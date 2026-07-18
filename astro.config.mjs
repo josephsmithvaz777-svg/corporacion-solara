@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import icon from 'astro-icon';
 
 // Salida estática → subir contenido de dist/ a public_html en DonWeb
 export default defineConfig({
@@ -9,4 +10,5 @@ export default defineConfig({
   build: {
     assets: '_assets',
   },
+  integrations: [icon()],
 });

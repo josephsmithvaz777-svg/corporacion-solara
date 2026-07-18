@@ -1,8 +1,14 @@
 ---
 import { reasons } from '../data/site';
+import bgImage from '../assets/agroinstria-viru.webp';
 ---
 
 <section class="section why" id="por-que-invertir" aria-labelledby="por-que-title">
+  <div class="why__bg" aria-hidden="true">
+    <img src={bgImage.src} alt="" width={bgImage.width} height={bgImage.height} loading="lazy" />
+  </div>
+  <div class="why__overlay" aria-hidden="true"></div>
+
   <div class="container why__grid">
     <div class="why__intro">
       <p class="section__eyebrow">Por qué invertir</p>
@@ -28,24 +34,70 @@ import { reasons } from '../data/site';
 
 <style>
   .why {
-    background: var(--gradient-luxury);
+    position: relative;
+    isolation: isolate;
     color: var(--color-white);
-    overflow: visible;
+    overflow: hidden;
+    background: var(--color-primary-dark);
+    padding-inline: 1.25rem !important;
   }
 
-  .why :global(.section__title),
-  .why :global(.section__lead) {
-    color: var(--color-white);
+  .why__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
 
-  .why :global(.section__lead) {
-    opacity: 0.85;
+  .why__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .why__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(
+        105deg,
+        rgba(8, 36, 31, 0.92) 0%,
+        rgba(13, 47, 40, 0.82) 45%,
+        rgba(13, 47, 40, 0.72) 100%
+      );
   }
 
   .why__grid {
+    position: relative;
+    z-index: 2;
     display: grid;
     gap: var(--space-5);
     align-items: start;
+    width: 100%;
+    max-width: none;
+    padding-inline: 0.25rem;
+  }
+
+  .why__intro {
+    max-width: 36rem;
+    padding-right: 0.5rem;
+  }
+
+  .why :global(.section__eyebrow) {
+    color: var(--color-gold-light);
+  }
+
+  .why :global(.section__title) {
+    color: var(--color-white);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .why :global(.section__lead) {
+    color: var(--color-white);
+    opacity: 0.9;
+    max-width: 34rem;
   }
 
   .why__cards {
@@ -54,38 +106,54 @@ import { reasons } from '../data/site';
   }
 
   .why__card {
-    border: 1px solid rgba(232, 198, 106, 0.28);
+    border: 1px solid rgba(199, 154, 43, 0.55);
     border-radius: var(--radius-card);
-    padding: var(--space-3);
-    background: rgba(255, 255, 255, 0.04);
+    padding: 1.5rem 1.4rem 1.45rem;
+    background: var(--gradient-gold);
+    box-shadow: var(--shadow-soft);
   }
 
   .why__card span {
     display: block;
-    color: var(--color-gold-light);
+    color: var(--color-primary);
     font-family: var(--font-family);
     font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.65rem;
+  }
+
+  .why__card h3 {
+    color: var(--color-primary);
+    font-family: var(--font-family);
+    font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
   }
 
-  .why__card h3 {
-    color: var(--color-white);
-    font-family: var(--font-family);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.4rem;
-  }
-
   .why__card p {
-    color: rgba(255, 255, 255, 0.78);
+    color: var(--color-primary-dark);
     font-size: 0.95rem;
+    line-height: 1.55;
+    margin: 0;
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 900px) {
+    .why {
+      padding-inline: 1.5rem !important;
+    }
+
     .why__grid {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-      gap: var(--space-4);
+      gap: var(--space-5);
+      padding-inline: 0.5rem;
+    }
+
+    .why__intro {
+      padding-right: 1.25rem;
+    }
+
+    .why__card {
+      padding: 1.65rem 1.6rem 1.6rem;
     }
   }
 </style>

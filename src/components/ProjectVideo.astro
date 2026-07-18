@@ -1,0 +1,51 @@
+---
+const videoId = 'fGYIxJs7t0w';
+const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`;
+---
+
+<section class="section video" id="mall-viru-video" aria-labelledby="video-title">
+  <div class="container">
+    <p class="section__eyebrow">Mall Virú</p>
+    <h2 class="section__title" id="video-title">El primer centro comercial en la provincia de Virú</h2>
+    <p class="section__lead">
+      Conoce Mall Virú: un proyecto que marca un nuevo hito comercial para la provincia y una oportunidad real para emprendedores e inversionistas.
+    </p>
+
+    <div class="video__frame">
+      <iframe
+        src={embedUrl}
+        title="Video de Mall Virú — Primer centro comercial en la provincia de Virú"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<style>
+  .video {
+    background: var(--color-surface);
+  }
+
+  .video__frame {
+    margin-top: var(--space-5);
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--color-primary-dark);
+    border: 1px solid rgba(199, 154, 43, 0.25);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .video__frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>

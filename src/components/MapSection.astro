@@ -1,29 +1,26 @@
 ---
+const officeEmbedUrl =
+  'https://www.google.com/maps?q=-8.4135827,-78.7522504&hl=es&z=18&output=embed';
 ---
 
 <section class="section map" id="mapa" aria-labelledby="mapa-title">
   <div class="container map__grid">
     <div>
       <p class="section__eyebrow">Ubicación</p>
-      <h2 class="section__title" id="mapa-title">Virú, zona de crecimiento</h2>
+      <h2 class="section__title" id="mapa-title">Nuestra oficina</h2>
       <p class="section__lead">
-        Nuestros proyectos se ubican en puntos estratégicos cerca al Puente Virú y la Panamericana, con proyección de desarrollo para familias y negocios.
+        Visítanos en Corporación Solara. Te atendemos para resolver dudas, cotizar y acompañarte en tu inversión.
       </p>
-      <ul>
-        <li>Virú</li>
-        <li>Trujillo</li>
-        <li>Chao</li>
-        <li>Chimbote</li>
-        <li>La Libertad</li>
-      </ul>
+      <p class="map__address">Corporación Solara · Virú, La Libertad</p>
     </div>
 
     <div class="map__frame">
       <iframe
-        title="Mapa de Virú, La Libertad"
+        title="Ubicación de la oficina Corporación Solara"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Puente%20Viru%20La%20Libertad%20Peru&output=embed"
+        allowfullscreen
+        src={officeEmbedUrl}
       ></iframe>
     </div>
   </div>
@@ -39,22 +36,10 @@
     gap: var(--space-4);
   }
 
-  .map ul {
-    margin: 1.5rem 0 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .map li {
-    background: var(--color-primary);
-    color: var(--color-gold-light);
-    border-radius: var(--radius-pill);
-    padding: 0.45rem 0.9rem;
-    font-size: 0.85rem;
-    font-weight: 500;
+  .map__address {
+    margin: 1.25rem 0 0;
+    color: var(--color-primary);
+    font-weight: 600;
   }
 
   .map__frame {

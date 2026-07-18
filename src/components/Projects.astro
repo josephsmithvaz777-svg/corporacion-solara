@@ -1,5 +1,19 @@
 ---
 import { projects, ctas } from '../data/site';
+import imgMallViru from '../assets/projects/img-card-mall-viru.webp';
+import imgOasis from '../assets/projects/img-card-oasis.webp';
+import imgCostaVerde from '../assets/projects/img-card-costa-verde.webp';
+
+const projectImages = {
+  'mall-viru': imgMallViru,
+  'oasis-residencial-ii': imgOasis,
+  'costa-verde': imgCostaVerde,
+} as const;
+
+const cards = projects.map((project) => ({
+  ...project,
+  src: projectImages[project.slug as keyof typeof projectImages],
+}));
 ---
 
 <section class="section projects" id="proyectos" aria-labelledby="proyectos-title">
@@ -12,10 +26,16 @@ import { projects, ctas } from '../data/site';
 
     <div class="projects__list">
       {
-        projects.map((project) => (
+        cards.map((project) => (
           <article class:list={['project', { 'project--featured': project.featured }]}>
             <div class="project__media">
-              <img src={project.image} alt={`Proyecto ${project.name}`} loading="lazy" />
+              <img
+                src={project.src.src}
+                alt={`Proyecto ${project.name}`}
+                width={project.src.width}
+                height={project.src.height}
+                loading="lazy"
+              />
             </div>
             <div class="project__body">
               <p class="project__type">{project.type}</p>
@@ -43,7 +63,7 @@ import { projects, ctas } from '../data/site';
 
   .projects__list {
     display: grid;
-    gap: var(--space-4);
+    gap: 1.5rem;
     margin-top: var(--space-5);
   }
 
@@ -54,79 +74,108 @@ import { projects, ctas } from '../data/site';
     border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: var(--shadow-soft);
-    transition: transform var(--transition), box-shadow var(--transition);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
   }
 
   .project:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-medium);
   }
 
   .project__media {
-    min-height: 240px;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
+    background: var(--color-primary-dark);
   }
 
   .project__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.5s ease;
   }
 
   .project:hover .project__media img {
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
 
   .project__body {
-    padding: var(--space-4);
+    padding: 1.35rem 1.35rem 1.5rem;
+    display: flex;
+    flex-direction: column;
   }
 
   .project__type {
     color: var(--color-gold);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.4rem;
   }
 
   .project h3 {
-    font-size: 2rem;
-    margin-bottom: 0.35rem;
+    font-size: 1.55rem;
+    margin: 0 0 0.3rem;
+    color: var(--color-primary);
   }
 
   .project__location {
     color: var(--color-text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    margin: 0 0 0.85rem;
   }
 
   .project__summary {
-    margin-bottom: 1rem;
+    margin: 0 0 0.85rem;
+    font-size: 0.95rem;
+    color: var(--color-text);
   }
 
   .project ul {
-    margin: 0 0 1.5rem;
+    margin: 0 0 1.25rem;
     padding-left: 1.1rem;
     color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    flex: 1;
   }
 
   .project li + li {
-    margin-top: 0.35rem;
+    margin-top: 0.3rem;
+  }
+
+  .project .btn {
+    align-self: flex-start;
   }
 
   @media (min-width: 900px) {
-    .project--featured {
-      grid-template-columns: 1.15fr 1fr;
+    .project {
+      grid-template-columns: minmax(200px, 0.85fr) minmax(0, 1.15fr);
+      align-items: stretch;
+      min-height: 0;
     }
 
-    .projects__list > .project:not(.project--featured) {
-      grid-template-columns: 0.9fr 1.1fr;
+    .project--featured {
+      grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.1fr);
     }
 
     .project__media {
-      min-height: 100%;
+      aspect-ratio: 3 / 4;
+      height: auto;
+      min-height: 0;
+      max-height: 420px;
+    }
+
+    .project__body {
+      padding: 1.5rem 1.5rem 1.6rem;
+      justify-content: center;
+    }
+
+    .project h3 {
+      font-size: 1.7rem;
     }
   }
 </style>

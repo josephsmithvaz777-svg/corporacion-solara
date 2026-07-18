@@ -4,11 +4,13 @@ import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Benefits from '../components/Benefits.astro';
 import Projects from '../components/Projects.astro';
+import ProjectVideo from '../components/ProjectVideo.astro';
 import WhyInvest from '../components/WhyInvest.astro';
 import Process from '../components/Process.astro';
 import Testimonials from '../components/Testimonials.astro';
 import FAQ from '../components/FAQ.astro';
 import MapSection from '../components/MapSection.astro';
+import Referidos from '../components/Referidos.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
 import WhatsApp from '../components/WhatsApp.astro';
@@ -27,15 +29,18 @@ import WhatsApp from '../components/WhatsApp.astro';
       </aside>
 
       <div class="layout-with-form__main">
-        <Benefits />
         <Projects />
+        <ProjectVideo />
+        <Testimonials />
+        <Benefits />
         <WhyInvest />
         <Process />
-        <Testimonials />
         <FAQ />
         <MapSection />
       </div>
     </div>
+
+    <Referidos />
   </main>
   <Footer />
   <WhatsApp />

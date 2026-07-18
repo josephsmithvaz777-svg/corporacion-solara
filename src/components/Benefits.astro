@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { benefits } from '../data/site';
 ---
 
@@ -15,9 +16,7 @@ import { benefits } from '../data/site';
         benefits.map((item) => (
           <article class="benefit">
             <div class="benefit__icon" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7l7-4z" />
-              </svg>
+              <Icon name={item.icon} size={28} />
             </div>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
@@ -61,6 +60,11 @@ import { benefits } from '../data/site';
     color: var(--color-gold);
     background: rgba(199, 154, 43, 0.12);
     margin-bottom: 1rem;
+  }
+
+  .benefit__icon :global(svg) {
+    width: 28px;
+    height: 28px;
   }
 
   .benefit h3 {

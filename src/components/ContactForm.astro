@@ -1,65 +1,38 @@
 ---
-import { ctas, projects } from '../data/site';
+const formId = '3VTgUQvgq6kWloJvkV8c';
+const formSrc = `https://links.flowincrm.com/widget/form/${formId}`;
+const formHeight = 825;
 ---
 
 <section class="lead" id="contacto" aria-label="Formulario de contacto">
   <div class="lead__panel">
     <div class="lead__badge">LOTES</div>
 
-    <form class="lead__form" method="post" action="#" data-contact-form>
-      <h2 class="lead__title">Quiero recibir información</h2>
-
-      <div class="lead__row">
-        <label>
-          <span class="sr-only">Nombre</span>
-          <input type="text" name="nombre" placeholder="Nombre*" required autocomplete="given-name" />
-        </label>
-        <label>
-          <span class="sr-only">Apellidos</span>
-          <input type="text" name="apellidos" placeholder="Apellidos*" required autocomplete="family-name" />
-        </label>
-      </div>
-
-      <div class="lead__row">
-        <label>
-          <span class="sr-only">Documento</span>
-          <input type="text" name="documento" placeholder="Nro. de documento*" required autocomplete="off" />
-        </label>
-        <label>
-          <span class="sr-only">Teléfono</span>
-          <input type="tel" name="telefono" placeholder="Teléfono* (+51)" required autocomplete="tel" />
-        </label>
-      </div>
-
-      <label>
-        <span class="sr-only">Correo</span>
-        <input type="email" name="email" placeholder="Correo electrónico*" required autocomplete="email" />
-      </label>
-
-      <label>
-        <span class="sr-only">Proyecto de interés</span>
-        <select name="proyecto" required>
-          <option value="">Proyecto de interés*</option>
-          {projects.map((p) => <option value={p.slug}>{p.name}</option>)}
-          <option value="otro">Quiero asesoria general</option>
-        </select>
-      </label>
-
-      <label class="lead__check">
-        <input type="checkbox" name="privacidad" required />
-        <span>He leído y acepto el tratamiento de mis datos personales.</span>
-      </label>
-
-      <label class="lead__check">
-        <input type="checkbox" name="comercial" />
-        <span>Acepto el envío de comunicaciones comerciales.</span>
-      </label>
-
-      <button class="btn btn--on-dark lead__submit" type="submit">{ctas.primary}</button>
-      <p class="lead__note" data-form-note hidden>Gracias. Pronto un asesor te contactará.</p>
-    </form>
+    <div class="lead__embed">
+      <iframe
+        src={formSrc}
+        style={`width:100%;height:${formHeight}px;border:none;border-radius:8px`}
+        id={`inline-${formId}`}
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Formulario"
+        data-height={String(formHeight)}
+        data-layout-iframe-id={`inline-${formId}`}
+        data-form-id={formId}
+        title="Formulario de contacto Solara"
+        loading="lazy"
+      >
+      </iframe>
+    </div>
   </div>
 </section>
+
+<script is:inline src="https://links.flowincrm.com/js/form_embed.js"></script>
 
 <style>
   .lead {
@@ -73,10 +46,10 @@ import { ctas, projects } from '../data/site';
     width: 100%;
     max-width: 560px;
     margin-inline: auto;
-    background: var(--color-primary);
-    border: 1px solid rgba(232, 198, 106, 0.35);
+    background: var(--color-white);
+    border: 1px solid rgba(199, 154, 43, 0.25);
     border-radius: var(--radius-card);
-    padding: 1.5rem 1.15rem 1.35rem;
+    padding: 1.75rem 0.75rem 0.75rem;
     box-shadow: var(--shadow-soft);
   }
 
@@ -84,6 +57,7 @@ import { ctas, projects } from '../data/site';
     position: absolute;
     top: 0;
     right: 1rem;
+    z-index: 2;
     background: var(--gradient-gold);
     color: var(--color-primary);
     font-size: 0.7rem;
@@ -93,72 +67,15 @@ import { ctas, projects } from '../data/site';
     border-radius: 0 0 10px 10px;
   }
 
-  .lead__form {
-    display: grid;
-    gap: 0.7rem;
-    margin-top: 0.5rem;
-  }
-
-  .lead__title {
-    color: var(--color-white);
-    font-family: var(--font-family);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .lead__row {
-    display: grid;
-    gap: 0.65rem;
-  }
-
-  .lead__form input,
-  .lead__form select {
+  .lead__embed {
     width: 100%;
-    min-height: 46px;
-    border-radius: var(--radius-input);
-    border: 1px solid var(--color-gold-soft);
-    background: var(--color-white);
-    color: var(--color-text);
-    padding: 0 0.85rem;
-    font-size: 0.9rem;
+    min-height: 825px;
   }
 
-  .lead__form input:focus,
-  .lead__form select:focus {
-    outline: 2px solid var(--color-gold);
-    outline-offset: 1px;
-  }
-
-  .lead__check {
-    display: flex;
-    gap: 0.55rem;
-    align-items: flex-start;
-    font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.88);
-  }
-
-  .lead__check input {
-    width: auto;
-    min-height: auto;
-    margin-top: 0.15rem;
-  }
-
-  .lead__submit {
+  .lead__embed iframe {
+    display: block;
     width: 100%;
-    min-height: 48px;
-  }
-
-  .lead__note {
-    color: var(--color-gold-light);
-    font-size: 0.9rem;
-    margin: 0;
-  }
-
-  @media (min-width: 700px) and (max-width: 1023px) {
-    .lead__row {
-      grid-template-columns: 1fr 1fr;
-    }
+    min-height: 825px;
   }
 
   @media (min-width: 1024px) {
@@ -173,71 +90,9 @@ import { ctas, projects } from '../data/site';
       max-width: none;
       max-height: calc(100vh - var(--nav-height) - 130px);
       overflow: auto;
-      padding: 1.15rem 0.9rem 1.1rem;
+      padding: 1.5rem 0.55rem 0.55rem;
       box-shadow: var(--shadow-luxury);
-    }
-
-    .lead__title {
-      font-size: 1.05rem;
-    }
-
-    .lead__form {
-      gap: 0.55rem;
-    }
-
-    .lead__form input,
-    .lead__form select {
-      min-height: 42px;
-      font-size: 0.85rem;
-      padding: 0 0.7rem;
-    }
-
-    .lead__check {
-      font-size: 0.7rem;
-    }
-
-    .lead__submit {
-      min-height: 44px;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .lead__row {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .lead__panel {
-      padding: 1.5rem 1.15rem 1.35rem;
-    }
-
-    .lead__title {
-      font-size: 1.2rem;
-    }
-
-    .lead__form {
-      gap: 0.7rem;
-    }
-
-    .lead__form input,
-    .lead__form select {
-      min-height: 46px;
-      font-size: 0.9rem;
-      padding: 0 0.85rem;
-    }
-
-    .lead__check {
-      font-size: 0.78rem;
+      background: var(--color-white);
     }
   }
 </style>
-
-<script>
-  const form = document.querySelector('[data-contact-form]');
-  const note = document.querySelector('[data-form-note]');
-
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (note) note.hidden = false;
-    if (form instanceof HTMLFormElement) form.reset();
-  });
-</script>
